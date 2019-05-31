@@ -86,15 +86,15 @@ extension SearchViewController {
 
     fileprivate func setupNavigationBar() {
         navigationItem.searchController = searchController
-        title = "Search"
+        title = "搜尋"
     }
 
     fileprivate func setupSearchController() {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation     = false
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.definesPresentationContext           = true
-        searchController.searchBar.placeholder                = "Search"
+        definesPresentationContext           = true
+        searchController.searchBar.placeholder                = "請輸入名字"
         searchController.searchBar.delegate                   = self
     }
 

@@ -36,7 +36,7 @@ extension DetailsViewController {
 
     fileprivate func initialSetup() {
         view.backgroundColor = .white
-        title = "About repository"
+        title = "Repository"
         setupViews()
         setupNavigationBarRightButton()
     }
@@ -53,20 +53,26 @@ extension DetailsViewController {
     }
 
     private func setupNavigationBarRightButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(favoriteButtonTapped))
+        let title = viewModel.repository.isFavorite ? "移除我的最愛" : "加入我的最愛"
+        let favoriteBtn = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(favoriteButtonTapped))
+        favoriteBtn.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.black], for: .normal)
+        navigationItem.rightBarButtonItem = favoriteBtn
     }
 
     @objc private func favoriteButtonTapped() {
         if !viewModel.repository.isFavorite {
             print("Favorite")
             viewModel.toggleFavorite()
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Unfavorite", style: .plain, target: self, action: #selector(favoriteButtonTapped))
+            let favoriteBtn = UIBarButtonItem(title: "加入我的最愛", style: .plain, target: self, action: #selector(favoriteButtonTapped))
+            favoriteBtn.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.black], for: .normal)
+            navigationItem.rightBarButtonItem = favoriteBtn
+
         } else {
             print("Delete from Favorite")
             viewModel.toggleFavorite()
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(favoriteButtonTapped))
+            let favoriteBtn = UIBarButtonItem(title: "移除我的最愛", style: .plain, target: self, action: #selector(favoriteButtonTapped))
+            favoriteBtn.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.black], for: .normal)
+            navigationItem.rightBarButtonItem = favoriteBtn
         }
-
     }
-
 }

@@ -31,6 +31,7 @@ final class FavoritesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         viewModel.fetchFavoriteRepositories { [weak self] in
             guard let self = self else { return }
             self.tableView.dataSource = self.viewModel.dataSource
@@ -66,13 +67,12 @@ extension FavoritesViewController {
     }
 
     fileprivate func setupNavigationBar() {
-        title = "Favorites"
+        title = "我的最愛"
     }
 
     fileprivate func setupTableView() {
         tableView.register(RepositoryCell.self, forCellReuseIdentifier: RepositoryCell.typeName)
-//        tableView.dataSource = viewModel.dataSource
-//        tableView.delegate   = self
+        tableView.delegate   = self
         tableView.tableFooterView = UIView()
     }
 
